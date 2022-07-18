@@ -37,7 +37,7 @@ class Genre(models.Model):
     slug = models.SlugField(max_length=100, unique=True)
 
     def __str__(self):
-        return self.name
+        return self.title
 
     class Meta:
         verbose_name = 'Жанр'
@@ -63,7 +63,7 @@ class Movie(models.Model):
     fees_in_world = models.PositiveIntegerField(
         'Сборы в мире', blank=True, null=True)
     category = models.ManyToManyField(
-        Category, verbose_name='Категория', null=True, blank=True)
+        Category, verbose_name='Категория')
     slug = models.SlugField(max_length=100, unique=True)
     draft = models.BooleanField('Черновик', default=True)
 
@@ -99,8 +99,8 @@ class RatingStar(models.Model):
         return self.value
 
     class Meta:
-        verbose_name = 'Кадр из фильма'
-        verbose_name_plural = 'Кадры из фильма'
+        verbose_name = 'Оценка'
+        verbose_name_plural = 'Оценки'
 
 
 class Rating(models.Model):
@@ -115,9 +115,8 @@ class Rating(models.Model):
         return f"{self.movie} - {self.star}"
 
     class Meta:
-        verbose_name = 'Кадр из фильма'
-        verbose_name_plural = 'Кадры из фильма'
-
+        verbose_name = 'Рейтинг'
+        verbose_name_plural = 'Рейтинги'
 
 class Review(models.Model):
     """Модель отывов"""
