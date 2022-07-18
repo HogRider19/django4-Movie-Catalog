@@ -64,6 +64,7 @@ class Movie(models.Model):
         'Сборы в мире', blank=True, null=True)
     category = models.ManyToManyField(
         Category, verbose_name='Категория')
+    genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
     slug = models.SlugField(max_length=100, unique=True)
     draft = models.BooleanField('Черновик', default=True)
 
