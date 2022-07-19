@@ -272,8 +272,10 @@
                 <!-- product right -->
                 <div class="left-ads-display col-lg-8">
                     <div class="row">
-                        <div class="desc1-left col-md-6">
+                        <div class="desc1-left col-md-6" style=''>
+                            <p style='text-align: center;'>
                             <img src="{{ movie.poster.url }}" class="img-fluid" alt="">
+                            </p>
                         </div>
                         <div class="desc1-right col-md-6 pl-lg-4">
                             <h3 class="editContent" style="outline: none; cursor: inherit;">
@@ -286,19 +288,27 @@
                                 <li style="list-style: none"><span><b>Слоган:</b> «{{ movie.tagline }}»</span>
                                 </li>
                                 <li style="list-style: none">
-                                    <span><b>Режиссер:</b> Тим Миллер</span></li>
-                                <li style="list-style: none"><span><b>Актеры:</b> Арнольд Шварценеггер, Маккензи Дэвис,
-                                    Эдвард Ферлонг, Линда Хэмилтон, Том Хоппер, Кассандра Старр, Гэбриел Луна,
-                                    Наталия Рейес, Стивен Кри, Диего Бонета</span></li>
-                                <li style="list-style: none"><span><b>Жанр:</b> фантастика, боевик, приключения</span>
-                                </li>
-                                <li style="list-style: none"><span><b>Премьера в мире:</b> 23 октября 2019</span>
+                                    <span><b>Режиссер:</b> 
+                                    {% for director in movie.directors.all %}
+                                        {{ director.name }},
+                                    {% endfor %}
+                                    </span></li>
+                                <li style="list-style: none"><span><b>Актеры:
+                                </b>
+                                {% for actor in movie.actors.all %}
+                                    {{ actor.name }},
+                                {% endfor %}
+                                </span></li>
+                                <li style="list-style: none"><span>
+                                <b>Жанр:</b>
+                                    {{ movie.genre.title }},
+                                </span>
                                 </li>
                                 <li style="list-style: none">
-                                    <span><b>Бюджет:</b> $185 000 000</span></li>
+                                    <span><b>Бюджет:</b> {{ movie.budget }}$</span></li>
                                 <li style="list-style: none">
-                                    <span><b>Сборы в США:</b> $61 150 256</span></li>
-                                <li style="list-style: none"><span><b>Сборы в мире:</b> $250 369 693</span>
+                                    <span><b>Сборы в США:</b> {{ movie.fees_in_use }}$</span></li>
+                                <li style="list-style: none"><span><b>Сборы в мире:</b> {{ movie.fees_in_world }}$</span>
                                 </li>
                                 <li style="list-style: none">
                                     <a href="#"><b>Рейтинг:</b>

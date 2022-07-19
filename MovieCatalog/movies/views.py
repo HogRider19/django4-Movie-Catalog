@@ -16,4 +16,8 @@ class MovieDetail(DetailView):
     model = Movie
     template_name = 'movies/movie_detail.html'
     context_object_name = 'movie'
-    
+
+    def get_queryset(self):
+        return Movie.objects.filter(
+            slug=self.kwargs.get('slug')).prefetch_related(
+                'directors').prefetch_related('actors').select_related('genre')
