@@ -331,8 +331,7 @@
                                         <label for="contactcomment" class="editContent"
                                                style="outline: none; cursor: inherit;">Ваш комментарий
                                             *</label>
-                                        <textarea class="form-control border" rows="5"
-                                                  id="contactcomment" required=""></textarea>
+                                        {{ form.text }}
                                     </div>
                                     <div class="d-sm-flex">
                                         <div class="col-sm-6 form-group p-0 editContent"
@@ -340,16 +339,14 @@
                                             <label for="contactusername" class="editContent"
                                                    style="outline: none; cursor: inherit;">Имя
                                                 *</label>
-                                            <input type="text" class="form-control border"
-                                                   id="contactusername" required="">
+                                            {{ form.name }}
                                         </div>
                                         <div class="col-sm-6 form-group ml-sm-3 editContent"
                                              style="outline: none; cursor: inherit;">
                                             <label for="contactemail" class="editContent"
                                                    style="outline: none; cursor: inherit;">Email
                                                 *</label>
-                                            <input type="email" class="form-control border"
-                                                   id="contactemail" required="">
+                                            {{ form.email }}
                                         </div>
                                     </div>
                                     <button type="submit"

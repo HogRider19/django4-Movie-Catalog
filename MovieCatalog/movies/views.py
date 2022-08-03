@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import Movie
+from .forms import ReviewForm
 
 
 class HomeView(ListView):
@@ -21,3 +22,8 @@ class MovieDetail(DetailView):
         return Movie.objects.filter(
             slug=self.kwargs.get('slug')).prefetch_related(
                 'directors').prefetch_related('actors').select_related('genre')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = ReviewForm()
+        return context
