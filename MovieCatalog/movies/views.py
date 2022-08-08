@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
-from .models import Movie
+from django.views.generic import ListView, DetailView, CreateView
+from .models import Movie, Review
 from .forms import ReviewForm
 
 
@@ -27,3 +27,19 @@ class MovieDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context['form'] = ReviewForm()
         return context
+
+
+class CreateReview(CreateView):
+    model = Review
+    form_class = ReviewForm
+
+    def form_valid(self, form):
+        form.instance.movie_id = self.kwargs.get('pk')
+        self.object = form.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return self.object.movie.get_absolute_url()
+
+
+    
