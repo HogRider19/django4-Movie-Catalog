@@ -128,9 +128,9 @@
                         <h3 class="shop-sing editContent" style="outline: none; cursor: inherit;">
                             О фильме {{ movie.name }}</h3>
                         <p>
-                            <img src="bundles/images/about.jpg" class="img-fluid" alt="">
-                            <img src="bundles/images/admin.jpg" class="img-fluid" alt="">
-                            <img src="bundles/images/d1.jpg" class="img-fluid" alt="">
+                            {% for movie_image in movie.shorts.all %}
+                                <img src="{{ movie_image.image.url }}" class="img-fluid" alt="">
+                            {% endfor %}
                         </p>
                         <p class="editContent" style="outline: none; cursor: inherit;">
                             {{ movie.description }}
@@ -138,7 +138,7 @@
                         <p class="mt-3 italic-blue editContent"
                            style="outline: none; cursor: inherit;">
                             <iframe width="560" height="315"
-                                    src="https://www.youtube.com/embed/A36LahZNUiE?controls=0"
+                                    src="{{ movie.trellers.all.0.link }}"
                                     frameborder="0" allow="accelerometer; autoplay;
                                                                            encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen>

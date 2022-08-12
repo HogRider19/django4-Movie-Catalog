@@ -96,6 +96,19 @@ class MovieShorts(models.Model):
         verbose_name_plural = 'Кадры из фильма'
 
 
+class Treller(models.Model):
+    """Треллер к фильму"""
+    link = models.CharField(max_length=500)
+    movie = models.ForeignKey(Movie, related_name='trellers', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Треллер - {self.movie.name}"
+
+    class Meta:
+        verbose_name = 'Треллер'
+        verbose_name_plural = 'Треллеры'
+
+
 class RatingStar(models.Model):
     """Модель оценки"""
     value = models.PositiveIntegerField('Значение', default=0)
