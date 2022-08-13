@@ -17,8 +17,33 @@ class ActorAdmin(admin.ModelAdmin):
 
 
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ['name', 'country']
+    list_display = ['name', 'country', 'draft']
+    actions = ['publish', 'unpublish']
     form = MovieAdminForm
+
+    def unpublish(self, request, queryset):
+        """Снять с публикации"""
+        row_update = queryset.update(draft=False)
+        if row_update == 1: 
+            message_bit = '1 запись обновлена'
+        else:
+            message_bit = f"{row_update} записисей обновлены"
+        self.message_user(request, f"{message_bit}")
+
+    def publish(self, request, queryset):
+        """Опубликовать"""
+        row_update = queryset.update(draft=True)
+        if row_update == 1: 
+            message_bit = '1 запись была добавлена'
+        else:
+            message_bit = f"{row_update} записисей были добавлены"
+        self.message_user(request, f"{message_bit}")
+
+    publish.short_description = 'Опубликовать'
+    publish.allowed_permissions = ('change', )
+
+    unpublish.short_description = 'Снять с публикации'
+    unpublish.allowed_permissions = ('change', )
 
 
 
