@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
-from .models import Movie, Review, Actor
+from .models import Movie, Review, Actor, Genre
 from .forms import ReviewForm
+from django.db.models import Q
 
 
 class HomeView(ListView):
@@ -29,7 +30,23 @@ class MovieDetail(DetailView):
         return context
 
 
+class FilterMovies(ListView):
+    """Класс фильтрации фильмов"""
+    model = Movie
+    template_name = 'movies/home.html'
+    context_object_name = 'movies'
+    paginate_by = 9
+
+    def get_queryset(self):
+        queryset = Movie.objects.filter(
+            Q(year__in=self.request.GET.getlist('year')) |
+            Q(genre__in=self.request.GET.getlist('genre'))
+        )
+        return queryset
+
+
 class CreateReview(CreateView):
+    """Класс создания отзыва к фильму"""
     model = Review
     form_class = ReviewForm
 
@@ -51,6 +68,3 @@ class ActorDetail(DetailView):
 
     def get_queryset(self):
         return Actor.objects.filter(name=self.kwargs.get('slug'))
-
-
-    

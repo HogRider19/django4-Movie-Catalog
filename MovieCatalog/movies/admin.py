@@ -23,7 +23,7 @@ class MovieAdmin(admin.ModelAdmin):
 
     def unpublish(self, request, queryset):
         """Снять с публикации"""
-        row_update = queryset.update(draft=False)
+        row_update = queryset.update(draft=True)
         if row_update == 1: 
             message_bit = '1 запись обновлена'
         else:
@@ -32,7 +32,7 @@ class MovieAdmin(admin.ModelAdmin):
 
     def publish(self, request, queryset):
         """Опубликовать"""
-        row_update = queryset.update(draft=True)
+        row_update = queryset.update(draft=False)
         if row_update == 1: 
             message_bit = '1 запись была добавлена'
         else:
