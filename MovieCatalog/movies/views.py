@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
-from .models import Movie, Review
+from .models import Movie, Review, Actor
 from .forms import ReviewForm
 
 
@@ -40,6 +40,17 @@ class CreateReview(CreateView):
 
     def get_success_url(self):
         return self.object.movie.get_absolute_url()
+
+
+class ActorDetail(DetailView):
+    """Класс вывода информации об актере"""
+    model = Actor
+    template_name = 'movies/actor.html'
+    context_object_name = 'actor'
+    slug_field = 'name'
+
+    def get_queryset(self):
+        return Actor.objects.filter(name=self.kwargs.get('slug'))
 
 
     

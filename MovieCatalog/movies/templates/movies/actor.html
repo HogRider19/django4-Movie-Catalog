@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} {{ actor.name }} {% endblock title %}
+
+
+{% block content %}
+
+    <div id="page" class="page">
+        <div class="main-banner inner bg bg1" id="home">
+            {% include 'include/header.html' %}
+        </div>
+
+        <ol class="breadcrumb editContent">
+            <li class="breadcrumb-item">
+                <a href="{% url 'home' %}" class="editContent"
+                style="outline: none; cursor: inherit;">Home</a>
+            </li>
+            <li class="breadcrumb-item active editContent" style="outline: none; cursor: inherit;">
+                Actor
+            </li>
+        </ol>
+
+
+        <section class="ab-info-main py-md-5 py-4 editContent"
+             style="outline: none; outline-offset: -2px; cursor: inherit; color: rgb(33, 37, 41); font-size: 16px; background-color: rgba(0, 0, 0, 0); font-family: Lato, sans-serif;">
+            <div class="container py-md-3">
+                <div class="row">
+                    <div class="side-bar col-lg-4">
+                        {% include 'include/side_bar.html' %}
+                    </div>
+                    <div class="left-ads-display col-lg-8">
+                    <div class="row">
+                        <div class="desc1-left col-md-6">
+                            <img src="{{ actor.image.url }}" class="img-fluid" alt="">
+                        </div>
+                        <div class="desc1-right col-md-6 pl-lg-4">
+                            <h3 class="editContent">
+                                {{ movie.title }}
+                            </h3>
+                            <h5 class="editContent"></h5>
+                            <ul>
+                                <li>
+                                    <span><b>Возраст:</b> {{ actor.age }} лет</span></li>
+                                <li>
+                                    <span><b>Режиссер:</b>
+                                        {% for movie in actor.film_director.all %}
+                                            {{ movie.name }}, 
+                                        {% endfor %}
+                                    </span>
+                                </li>
+                                <li><span><b>Актер:</b>
+                                    {% for movie in actor.film_actor.all %}
+                                        {{ movie.name }}, 
+                                    {% endfor %}
+                                </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row sub-para-w3layouts mt-5">
+                        <h3 class="shop-sing editContent">
+                            {{ actor.name }}
+                        </h3>
+                        <p class="editContent">
+                            {{ actor.description|safe }}
+                        </p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+
+{% endblock %}
