@@ -114,11 +114,12 @@ class RatingStar(models.Model):
     value = models.PositiveIntegerField('Значение', default=0)
 
     def __str__(self):
-        return self.value
+        return f"{self.value}"
 
     class Meta:
         verbose_name = 'Оценка'
         verbose_name_plural = 'Оценки'
+        ordering = ['-value']
 
 
 class Rating(models.Model):
