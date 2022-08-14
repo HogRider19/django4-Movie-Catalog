@@ -102,3 +102,14 @@ class Search(ListView):
 
     def get_queryset(self):
             return Movie.objects.filter(name__icontains=self.request.GET.get("q"))
+
+
+class CategoryView(ListView):
+    """Класс вывода фильмов по категориям"""
+    model = Movie
+    paginate_by = 9
+    template_name = 'movies/home.html'
+    context_object_name = 'movies'
+
+    def get_queryset(self):
+        return Movie.objects.filter(category__id=self.kwargs.get('category_id'))

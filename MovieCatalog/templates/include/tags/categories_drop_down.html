@@ -1,6 +1,5 @@
-
 <ul>
     {% for category in categories %}
-    <li><a href="moviesingle.html">{{ category.title }}</a></li>
+    <li><a href="{% url 'categoryview' category.id %}" name=>{{ category.title }}</a></li>
     {% endfor %}
 </ul>
