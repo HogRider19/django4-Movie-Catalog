@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'movies',
+    'contact',
 
     'ckeditor',
     'ckeditor_uploader',
