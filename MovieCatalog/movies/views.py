@@ -92,3 +92,18 @@ class AddStarRating(View):
             return HttpResponse(status=201)
         else:
             return HttpResponse(status=400)
+
+
+class Search(ListView):
+    """Класс поиска фильма"""
+    model = Movie
+    template_name = 'movies/home.html'
+    context_object_name = 'movies'
+
+    def get_queryset(self):
+            return Movie.objects.filter(name__icontains=self.request.GET.get("q"))
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["q"] = f'{self.request.GET.get("q")}'
+        return context
