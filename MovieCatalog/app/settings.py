@@ -41,9 +41,11 @@ INSTALLED_APPS = [
 
     'movies',
     'contact',
+    'api',
 
     'ckeditor',
     'ckeditor_uploader',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
